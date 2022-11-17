@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { setSelectedFolder } from "../features";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Folder = ({ explorer }) => {
   const dispatch = useDispatch();
   const [expand, setExpand] = useState(true);
-  const { selected_folder } = useSelector((state) => state.familydata);
-  console.log("THAT DATA: ", explorer)
 
   const handleClick = (selected_folder) => {
     if (explorer.items.length) setExpand((prev) => !prev);

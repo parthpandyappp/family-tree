@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { updateFamilyData } from "../features";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, TextField, Box } from "@mui/material/";
 
 const FamilyForm = () => {
   const initialValues = {
     id: "",
-    name: "",
-    spouse: "",
-    location: "",
-    birth_yr: "",
-    addr: "",
+    name: "Son 1",
+    spouse: "Son 1's spouse",
+    location: "Koorla",
+    birth_yr: "1898",
+    addr: "Sajjangarh, Rajashthan(398563)",
     items: [],
   };
   const dispatch = useDispatch();
@@ -28,52 +29,67 @@ const FamilyForm = () => {
   console.log(form_data);
 
   return (
-    <form
-      style={{
+    <Box
+      component="form"
+      sx={{
+        width: "25rem",
         border: "1px solid black",
-        display: "flex",
-        flexDirection: "column",
-        maxWidth: "75%",
+        borderRadius: "1rem",
         padding: "1rem",
+        "& .MuiTextField-root": { m: 1 },
       }}
+      noValidate
+      autoComplete="off"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name">Name</label>
-      <input
-        name="name"
-        type="text"
-        onChange={(e) => handleChange("name", e.target.value)}
-      />
+      <Box component="div" sx={{ display: "flex", flexDirection: "column" }}>
+        <Box component="div" sx={{ display: "flex" }}>
+          <TextField
+            required
+            name="name"
+            onChange={(e) => handleChange("name", e.target.value)}
+            label="Name of the child"
+            defaultValue={form_data.name}
+          />
+          <TextField
+            required
+            name="spouse_name"
+            onChange={(e) => handleChange("spouse", e.target.value)}
+            label="Spouse name"
+            defaultValue={form_data.spouse}
+          />
+        </Box>
+        <Box component="div" sx={{ display: "flex" }}>
+          <TextField
+            required
+            name="location"
+            onChange={(e) => handleChange("location", e.target.value)}
+            label="Location"
+            defaultValue={form_data.location}
+          />
+          <TextField
+            required
+            name="birth_year"
+            type="number"
+            onChange={(e) => handleChange("birth_yr", e.target.value)}
+            label="Birth year"
+            defaultValue={form_data.birth_yr}
+          />
+        </Box>
 
-      <label htmlFor="spouse_name">Spouse name</label>
-      <input
-        name="spouse_name"
-        type="text"
-        onChange={(e) => handleChange("spouse", e.target.value)}
-      />
+        <TextField
+          required
+          name="address"
+          onChange={(e) => handleChange("addr", e.target.value)}
+          label="Permanent address"
+          defaultValue={form_data.addr}
+        />
 
-      <label htmlFor="location">Location</label>
-      <input
-        name="location"
-        type="text"
-        onChange={(e) => handleChange("location", e.target.value)}
-      />
-
-      <label htmlFor="birth_year">Birth year</label>
-      <input
-        name="birth_year"
-        type="text"
-        onChange={(e) => handleChange("birth_yr", e.target.value)}
-      />
-
-      <label htmlFor="address">Present address</label>
-      <input
-        name="address"
-        type="text"
-        onChange={(e) => handleChange("addr", e.target.value)}
-      />
-      <button type="submit">Submit</button>
-    </form>
+        <Button type="submit" variant="contained" sx={{ margin: "0.5rem" }}>
+          Submit
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

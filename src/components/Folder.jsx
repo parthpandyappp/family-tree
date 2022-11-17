@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { setSelectedFolder } from "../features";
+import { useDispatch } from "react-redux";
+
 const Folder = ({ explorer }) => {
+  const dispatch = useDispatch();
   const [expand, setExpand] = useState(true);
-  console.log(explorer);
+
+  const handleClick = (selected_folder) => {
+    if (explorer.items.length) setExpand((prev) => !prev);
+    dispatch(setSelectedFolder(selected_folder));
+  };
+
   return (
     <div>
       <span
         style={{ textDecoration: "underline" }}
-        onClick={() =>
-          explorer.items.length ? setExpand((prev) => !prev) : null
-        }
+        onClick={() => {
+          handleClick(explorer);
+        }}
       >
         {explorer.name}
         <br />

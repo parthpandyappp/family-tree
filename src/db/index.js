@@ -1,0 +1,1 @@
+export { familyData } from "./familyData"

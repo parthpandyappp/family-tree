@@ -1,11 +1,12 @@
-import { familyData } from "../db";
 import { v4 as uuid } from 'uuid';
+import { familyData } from "../db";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     selected_folder: {},
     family_data: {},
     is_form: false,
+    formOrDetails: false,
 }
 
 
@@ -20,7 +21,7 @@ const familySlice = createSlice({
             state.selected_folder = action.payload
         },
         toggleForm: (state) => {
-            state.is_form = !state.is_form
+            state.formOrDetails = !state.formOrDetails
         },
         updateFamilyData: (state, action) => {
             const { form_data, selected_folder } = action.payload;

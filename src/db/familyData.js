@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 const familyData = {
     id: uuid(),
-    name: "Great Grand Father",
+    name: "Grand Father",
     spouse: "GrandFather's spouse",
     location: "Bhopal",
     birth_yr: "1985",

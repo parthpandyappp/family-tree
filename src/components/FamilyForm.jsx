@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { updateFamilyData } from "../features";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextField, Box } from "@mui/material/";
+import { updateFamilyData, toggleForm } from "../features";
 
 const FamilyForm = () => {
   const initialValues = {
@@ -20,6 +20,7 @@ const FamilyForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateFamilyData({ form_data, selected_folder }));
+    dispatch(toggleForm());
   };
 
   const handleChange = (field, value) => {
@@ -32,9 +33,13 @@ const FamilyForm = () => {
     <Box
       component="form"
       sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         width: "25rem",
+        height: "20.5rem",
         border: "1px solid black",
-        borderRadius: "1rem",
+        borderRadius: "0.7rem",
         padding: "1rem",
         "& .MuiTextField-root": { m: 1 },
       }}

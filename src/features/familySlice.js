@@ -38,7 +38,7 @@ const familySlice = createSlice({
                 })
             }
             state.family_data = {
-                ...state.family_data, items: state.family_data.items.map(item => {
+                ...state.family_data, items: state.family_data.id === itemId ? [...state.family_data.items, { ...form_data, id: uuid() }] : state.family_data.items.map(item => {
                     if (item.id === itemId) {
                         return { ...item, items: [...item.items, { ...form_data, id: uuid() }] }
                     }

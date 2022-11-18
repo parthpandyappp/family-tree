@@ -27,7 +27,7 @@ const FamilyForm = () => {
     setFormData({ ...form_data, [field]: value });
   };
 
-  console.log(form_data);
+  // console.log(form_data);
 
   return (
     <Box

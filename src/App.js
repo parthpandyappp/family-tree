@@ -1,9 +1,10 @@
 import './App.css';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Folder, FamilyDetails, FamilyForm } from './components';
+import { Folder, FamilyDetails, FamilyForm, PdfDocument } from './components';
 import { setFamilyData, toggleForm, setSelectedFolder } from './features';
 import { Box, Button, Typography } from "@mui/material"
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 function App() {
   const dispatch = useDispatch()
@@ -29,7 +30,20 @@ function App() {
             <Folder explorer={family_data} />
           </Box>
           {!formOrDetails ? <Button sx={{ justifySelf: "center", alignSelf: "center", width: "15rem", marginTop: "0.5rem" }} variant="contained" onClick={() => dispatch(toggleForm())}>Add family</Button> : <Button sx={{ justifySelf: "center", alignSelf: "center", width: "15rem", marginTop: "0.5rem" }} variant="contained" disabled>Add family</Button>}
-          <Button sx={{ width: "15rem", justifySelf: "center", alignSelf: "center", marginTop: "0.5rem" }} variant="contained" >Print Family Tree</Button>
+
+          <PDFDownloadLink
+            document={<PdfDocument obj={selected_folder} />}
+            fileName="tree.pdf"
+            style={{
+              textDecoration: "none",
+              padding: "10px",
+              display: "flex", width: "15rem", marginTop: "0.5rem"
+            }}
+          >
+            {({ blob, url, loading, error }) =>
+              loading ? <Button variant="contained" sx={{ justifySelf: "center", alignSelf: "center", width: "15rem" }} disabled>Print Family tree</Button> : <Button variant="contained" sx={{ justifySelf: "center", alignSelf: "center", width: "15rem" }}>Print Family tree</Button>
+            }
+          </PDFDownloadLink>
         </Box>
         {formOrDetails ? <FamilyForm /> : <FamilyDetails family_details={selected_folder} />}
       </Box >

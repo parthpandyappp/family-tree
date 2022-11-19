@@ -22,6 +22,7 @@ const PdfDocument = ({ obj }) => {
                   return <Text>---{item.name}</Text>;
                 });
               }
+              return null;
             })}
             {oth.map((item) => item)}
           </View>
